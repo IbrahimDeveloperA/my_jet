@@ -1,11 +1,14 @@
 package com.on.myjet
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,8 +21,10 @@ import androidx.compose.foundation.layout.paddingFrom
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.VerticalPager
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ShoppingCart
 import androidx.compose.material3.Card
@@ -57,7 +62,39 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            newText()
+            Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+                newText()
+            }
         }
     }
 }
@@ -65,19 +102,23 @@ class MainActivity : ComponentActivity() {
 //@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun newText() {
-
+    var counter = remember {
+        mutableStateOf(0)
+    }
     val painter =
         rememberImagePainter(data = "https://images.unsplash.com/photo-1628373383885-4be0bc0172fa?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1301&q=80")
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(12.dp),
+            .padding(12.dp).clickable { counter.value++ },
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 20.dp
         )
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
             Image(
                 contentScale = ContentScale.Crop,
                 painter = painterResource(id = R.drawable.img),
@@ -86,6 +127,9 @@ fun newText() {
                     .size(84.dp)
                     .padding(12.dp)
                     .clip(CircleShape)
+                    .clickable {
+                        Log.d("OLOLO", "newText: NewText")
+                    }
             )
 
             Column(modifier = Modifier.padding(start = 12.dp)) {
@@ -94,7 +138,7 @@ fun newText() {
                     style = TextStyle(fontSize = 28.sp),
                 )
                 Text(
-                    text = "Ibrahim",
+                    text = counter.value.toString() ,
                     style = TextStyle(fontSize = 20.sp),
                 )
             }
